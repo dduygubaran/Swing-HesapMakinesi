@@ -49,13 +49,13 @@ public class OSGIservice2 {
 		onumbers.put("billion", 1000000000);
 
 		// TR
-		numbersTR.put("sıfır", 0);
+		numbersTR.put("sÄ±fÄ±r", 0);
 		numbersTR.put("bir", 1);
 		numbersTR.put("iki", 2);
-		numbersTR.put("üç", 3);
-		numbersTR.put("dört", 4);
-		numbersTR.put("beş", 5);
-		numbersTR.put("altı", 6);
+		numbersTR.put("Ã¼Ã§", 3);
+		numbersTR.put("dÃ¶rt", 4);
+		numbersTR.put("beÅŸ", 5);
+		numbersTR.put("altÄ±", 6);
 		numbersTR.put("yedi", 7);
 		numbersTR.put("sekiz", 8);
 		numbersTR.put("dokuz", 9);
@@ -63,14 +63,14 @@ public class OSGIservice2 {
 
 		tnumbersTR.put("yirmi", 20);
 		tnumbersTR.put("otuz", 30);
-		tnumbersTR.put("kırk", 40);
+		tnumbersTR.put("kÄ±rk", 40);
 		tnumbersTR.put("elli", 50);
-		tnumbersTR.put("altmış", 60);
-		tnumbersTR.put("yetmiş", 70);
+		tnumbersTR.put("altmÄ±ÅŸ", 60);
+		tnumbersTR.put("yetmiÅŸ", 70);
 		tnumbersTR.put("seksen", 80);
 		tnumbersTR.put("doksan", 90);
 
-		onumbersTR.put("yüz", 100);
+		onumbersTR.put("yÃ¼z", 100);
 		onumbersTR.put("bin", 1000);
 		onumbersTR.put("milyon", 1000000);
 		onumbersTR.put("milyar", 1000000000);
@@ -124,12 +124,12 @@ public class OSGIservice2 {
 		Integer previous = 0;
 		String[] splitted = input.toLowerCase().split(" ");
 		// splitted[0]= "iki"
-		// splitted[1]= "yüz"
-		// splitted[2]= "beş"
+		// splitted[1]= "yÃ¼z"
+		// splitted[2]= "beÃ¾"
 		// -----------------
 		// splitted[0]= "bin"
-		// splitted[1]= "yüz"
-		// splitted[2]= "beş"
+		// splitted[1]= "yÃ¼z"
+		// splitted[2]= "beÃ¾"
 		for (String split : splitted) {
 
 			if (numbersTR.get(split) != null) {
