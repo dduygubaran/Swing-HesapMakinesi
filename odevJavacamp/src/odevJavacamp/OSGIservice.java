@@ -5,8 +5,8 @@ public class OSGIservice {
 			"eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
 	String tensMap[] = { "zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };
 
-	String unitsMapTR[] = { "sıfır", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz", "on" };
-	String tensMapTR[] = { "sıfır", "on", "yirmi", "otuz", "kırk", "elli", "altmış", "yetmiş", "seksen", "doksan" };
+	String unitsMapTR[] = { "sÄ±fÄ±r", "bir", "iki", "Ã¼Ã§", "dÃ¶rt", "beÅŸ", "altÄ±", "yedi", "sekiz", "dokuz", "on" };
+	String tensMapTR[] = { "sÄ±fÄ±r", "on", "yirmi", "otuz", "kÄ±rk", "elli", "altmÄ±ÅŸ", "yetmiÅŸ", "seksen", "doksan" };
 
 	public String NumberToWords(int number, String lang) {
 
@@ -18,7 +18,7 @@ public class OSGIservice {
 			billion = " milyar ";
 			million = " milyon ";
 			thousand = " bin ";
-			hundred = " yüz ";
+			hundred = " yÃ¼z ";
 		}
 		// number=1105
 		if (number == 0)
