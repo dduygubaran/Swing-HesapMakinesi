@@ -125,11 +125,11 @@ public class OSGIservice2 {
 		String[] splitted = input.toLowerCase().split(" ");
 		// splitted[0]= "iki"
 		// splitted[1]= "yüz"
-		// splitted[2]= "beþ"
+		// splitted[2]= "beş"
 		// -----------------
 		// splitted[0]= "bin"
 		// splitted[1]= "yüz"
-		// splitted[2]= "beþ"
+		// splitted[2]= "beş"
 		for (String split : splitted) {
 
 			if (numbersTR.get(split) != null) {
