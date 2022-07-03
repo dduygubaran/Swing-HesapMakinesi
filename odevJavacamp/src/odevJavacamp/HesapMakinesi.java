@@ -15,6 +15,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class HesapMakinesi {
 	
@@ -39,7 +41,7 @@ public class HesapMakinesi {
 	JButton btnToplama = new JButton();
 	JButton btnCikarma = new JButton();
 	JButton btnCarpma = new JButton();
-	JButton btnBolme = new JButton();
+	JButton btnBolme = new JButton(); 
 
 	/**
 	 * Launch the application.
@@ -122,11 +124,43 @@ public class HesapMakinesi {
 		frame.getContentPane().add(result_text);
 
 		value1 = new JTextField();
+		
+		// just character number is not allowed
+		
+		value1.addKeyListener(new KeyAdapter() {
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				char a = e.getKeyChar();
+			if(Character.isLetter(a) || Character.isWhitespace(a) || Character.isISOControl(a)) {
+				value1.setEditable(true);
+			} else {
+				value1.setEditable(false);
+			}
+			}
+		});
+		
 		value1.setBounds(184, 56, 96, 19);
 		frame.getContentPane().add(value1);
 		value1.setColumns(10);
 
 		value2 = new JTextField();
+		
+		//just character number is not allowed
+		
+		value2.addKeyListener(new KeyAdapter() {
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				char b = e.getKeyChar();
+				if(Character.isLetter(b) || Character.isWhitespace(b) || Character.isISOControl(b)) {
+					value2.setEditable(true);
+				} else {
+					value2.setEditable(false);
+				}
+			}
+		});
+		
 		value2.setBounds(184, 103, 96, 19);
 		frame.getContentPane().add(value2);
 		value2.setColumns(10);
@@ -158,8 +192,26 @@ public class HesapMakinesi {
 			public void actionPerformed(ActionEvent e) {
 				long v1 = service2.wordToNumber(value1.getText(), currentLang);
 				long v2 = service2.wordToNumber(value2.getText(), currentLang);
-				long extraction = v1 - v2;
-				result.setText(service.NumberToWords((int) extraction, currentLang));
+				
+				if(v1 > v2) {
+					long extraction = v1 - v2;
+					result.setText(service.NumberToWords((int) extraction, currentLang));
+				}
+				
+				// v2 > v1 
+				
+				else {
+					long extraction = v2 - v1 ; 
+					
+					//according to selecting language
+					
+					if(currentLang=="TR") {
+						result.setText("eksi " + service.NumberToWords((int) extraction, currentLang));
+					} else {
+						result.setText("minus " + service.NumberToWords((int) extraction, currentLang));
+					}
+					
+				}
 			}
 			
 		});
