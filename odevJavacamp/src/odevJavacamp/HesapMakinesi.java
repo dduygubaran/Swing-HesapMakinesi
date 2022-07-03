@@ -95,7 +95,7 @@ public class HesapMakinesi {
 		btnToplama.setText(bundle.getString("toplama"));
 		btnCikarma.setText(bundle.getString("cikarma"));
 		btnCarpma.setText(bundle.getString("carpma"));
-		btnBolme.setText(bundle.getString("bölme"));
+		btnBolme.setText(bundle.getString("bÃ¶lme"));
 
 	}
 
@@ -125,7 +125,7 @@ public class HesapMakinesi {
 
 		value1 = new JTextField();
 		
-		// just character number is not allowed
+		// just character, number is not allowed
 		
 		value1.addKeyListener(new KeyAdapter() {
 			
@@ -146,7 +146,7 @@ public class HesapMakinesi {
 
 		value2 = new JTextField();
 		
-		//just character number is not allowed
+		//just character, number is not allowed
 		
 		value2.addKeyListener(new KeyAdapter() {
 			
@@ -233,7 +233,7 @@ public class HesapMakinesi {
 		btnCarpma.setBounds(279, 174, 137, 21);
 		frame.getContentPane().add(btnCarpma);
 
-		btnBolme.setText(bundle.getString("bölme"));
+		btnBolme.setText(bundle.getString("bÃ¶lme"));
 		btnBolme.setFont(new Font("Arial", Font.BOLD, 12));
 		
 		btnBolme.addActionListener(new ActionListener() {
