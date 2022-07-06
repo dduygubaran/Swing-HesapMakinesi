@@ -19,16 +19,16 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class HesapMakinesi {
-	
+
 	private JFrame frame;
 	private JTextField value1;
 	private JTextField value2;
 	private JTextField result;
 	private final String EN_LANG = "ENG";
 	private final String TR_LANG = "TR";
-	
+
 	ResourceBundle bundle = null;
-	
+
 	private String currentFlag;
 	private String currentLang;
 
@@ -37,11 +37,14 @@ public class HesapMakinesi {
 	JLabel second_number = new JLabel();
 	JLabel hearder_text = new JLabel();
 	JLabel result_text = new JLabel();
+	JLabel lblStatus = new JLabel();
+	JLabel lblStatusInfo = new JLabel("---");
+
 	JButton lang_button = new JButton();
 	JButton btnToplama = new JButton();
 	JButton btnCikarma = new JButton();
 	JButton btnCarpma = new JButton();
-	JButton btnBolme = new JButton(); 
+	JButton btnBolme = new JButton();
 
 	/**
 	 * Launch the application.
@@ -73,7 +76,7 @@ public class HesapMakinesi {
 	 */
 
 	public void setLanguage(String language) {
-
+	
 		if (language.equals(EN_LANG)) {
 			bundle = ResourceBundle.getBundle("resources/turkish");
 			currentFlag = EN_LANG;
@@ -95,7 +98,9 @@ public class HesapMakinesi {
 		btnToplama.setText(bundle.getString("toplama"));
 		btnCikarma.setText(bundle.getString("cikarma"));
 		btnCarpma.setText(bundle.getString("carpma"));
-		btnBolme.setText(bundle.getString("bÃ¶lme"));
+		btnBolme.setText(bundle.getString("bölme"));
+		lblStatus.setText(bundle.getString("durum"));
+		lblStatusInfo.setText("---");
 
 	}
 
@@ -124,43 +129,43 @@ public class HesapMakinesi {
 		frame.getContentPane().add(result_text);
 
 		value1 = new JTextField();
-		
+
 		// just character, number is not allowed
-		
+
 		value1.addKeyListener(new KeyAdapter() {
-			
+
 			@Override
 			public void keyPressed(KeyEvent e) {
 				char a = e.getKeyChar();
-			if(Character.isLetter(a) || Character.isWhitespace(a) || Character.isISOControl(a)) {
-				value1.setEditable(true);
-			} else {
-				value1.setEditable(false);
-			}
+				if (Character.isLetter(a) || Character.isWhitespace(a) ||  Character.isISOControl(a) )  {
+					value1.setEditable(true);
+				} else {
+					value1.setEditable(false);
+				}
 			}
 		});
-		
+
 		value1.setBounds(184, 56, 96, 19);
 		frame.getContentPane().add(value1);
 		value1.setColumns(10);
 
 		value2 = new JTextField();
-		
-		//just character, number is not allowed
-		
+
+		// just character, number is not allowed
+
 		value2.addKeyListener(new KeyAdapter() {
-			
+
 			@Override
 			public void keyPressed(KeyEvent e) {
 				char b = e.getKeyChar();
-				if(Character.isLetter(b) || Character.isWhitespace(b) || Character.isISOControl(b)) {
+				if (Character.isLetter(b) || Character.isWhitespace(b) || Character.isISOControl(b)) {
 					value2.setEditable(true);
 				} else {
 					value2.setEditable(false);
 				}
 			}
 		});
-		
+
 		value2.setBounds(184, 103, 96, 19);
 		frame.getContentPane().add(value2);
 		value2.setColumns(10);
@@ -172,74 +177,85 @@ public class HesapMakinesi {
 
 		btnToplama.setText(bundle.getString("toplama"));
 		btnToplama.setFont(new Font("Arial", Font.BOLD, 12));
-		
+
 		btnToplama.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				long v1 = service2.wordToNumber(value1.getText(), currentLang);
-				long v2 = service2.wordToNumber(value2.getText(), currentLang);
+				Long v1 = service2.wordToNumber(value1.getText(), currentLang);
+				Long v2 = service2.wordToNumber(value2.getText(), currentLang);
+				if(!nullCheck(v1,v2)) {
+					return;
+				}
 				long sum = v1 + v2;
 				result.setText(service.NumberToWords((int) sum, currentLang));
 			}
-			
+
 		});
 		btnToplama.setBounds(10, 174, 109, 21);
 		frame.getContentPane().add(btnToplama);
 
 		btnCikarma.setText(bundle.getString("cikarma"));
 		btnCikarma.setFont(new Font("Arial", Font.BOLD, 12));
-		
+
 		btnCikarma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				long v1 = service2.wordToNumber(value1.getText(), currentLang);
-				long v2 = service2.wordToNumber(value2.getText(), currentLang);
-				
-				if(v1 > v2) {
+				Long v1 = service2.wordToNumber(value1.getText(), currentLang);
+				Long v2 = service2.wordToNumber(value2.getText(), currentLang);
+				if(!nullCheck(v1,v2)) {
+					return;
+				}
+				if (v1 > v2) {
 					long extraction = v1 - v2;
 					result.setText(service.NumberToWords((int) extraction, currentLang));
 				}
-				
-				// v2 > v1 
-				
+
+				// v2 > v1
+
 				else {
-					long extraction = v2 - v1 ; 
-					
-					//according to selecting language
-					
-					if(currentLang=="TR") {
+					long extraction = v2 - v1;
+
+					// according to selecting language
+
+					if (currentLang == "TR") {
 						result.setText("eksi " + service.NumberToWords((int) extraction, currentLang));
 					} else {
 						result.setText("minus " + service.NumberToWords((int) extraction, currentLang));
 					}
-					
+
 				}
 			}
-			
+
 		});
 		btnCikarma.setBounds(144, 174, 114, 21);
 		frame.getContentPane().add(btnCikarma);
 
 		btnCarpma.setText(bundle.getString("carpma"));
 		btnCarpma.setFont(new Font("Arial", Font.BOLD, 12));
-		
+
 		btnCarpma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				long v1 = service2.wordToNumber(value1.getText(), currentLang);
-				long v2 = service2.wordToNumber(value2.getText(), currentLang);
+				Long v1 = service2.wordToNumber(value1.getText(), currentLang);
+				Long v2 = service2.wordToNumber(value2.getText(), currentLang);
+				if(!nullCheck(v1,v2)) {
+					return;
+				}
 				long multiplication = v1 * v2;
 				result.setText(service.NumberToWords((int) multiplication, currentLang));
 			}
-			
+
 		});
 		btnCarpma.setBounds(279, 174, 137, 21);
 		frame.getContentPane().add(btnCarpma);
 
-		btnBolme.setText(bundle.getString("bÃ¶lme"));
+		btnBolme.setText(bundle.getString("bölme"));
 		btnBolme.setFont(new Font("Arial", Font.BOLD, 12));
-		
+
 		btnBolme.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				long v1 = service2.wordToNumber(value1.getText(), currentLang);
-				long v2 = service2.wordToNumber(value2.getText(), currentLang);
+				Long v1 = service2.wordToNumber(value1.getText(), currentLang);
+				Long v2 = service2.wordToNumber(value2.getText(), currentLang);
+				if(!nullCheck(v1,v2)) {
+					return;
+				}
 				long division = v1 / v2;
 				result.setText(service.NumberToWords((int) division, currentLang));
 			}
@@ -265,6 +281,31 @@ public class HesapMakinesi {
 		});
 		lang_button.setBounds(403, 55, 85, 21);
 		frame.getContentPane().add(lang_button);
+
+		lblStatus.setText(bundle.getString("durum"));
+		lblStatus.setBounds(76, 330, 45, 13);
+		frame.getContentPane().add(lblStatus);
+
+		lblStatusInfo.setText("---");
+		lblStatusInfo.setBounds(140, 330, 200, 13);
+		frame.getContentPane().add(lblStatusInfo);
 	}
 
+	private boolean nullCheck(Long v1, Long v2) {
+		if (v1 == null || v2 == null) {
+			lblStatusInfo.setText(bundle.getString("hataligirdi"));
+			return false;
+		}
+		lblStatusInfo.setText("---");
+		return true;
+	}
+	
+	/* BundleContext bundleContext = FrameworkUtil.getBundle(MyService.class).getBundleContext();
+	ServiceReference<MyService> serviceReference = bundleContext.getServiceReference(MyService.class, null);
+	try {
+	    MyService myService = bundleContext.getService(serviceReference);
+	    // do something with myService
+	} finaly {
+	    bundleContext.ungetService(serviceReference);
+	}*/ 
 }
