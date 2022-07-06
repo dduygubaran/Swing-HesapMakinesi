@@ -32,7 +32,7 @@ public class HesapMakinesi {
 	private String currentFlag;
 	private String currentLang;
 
-	// define buttons
+	// define labels and buttons
 	JLabel first_number = new JLabel();
 	JLabel second_number = new JLabel();
 	JLabel hearder_text = new JLabel();
@@ -98,7 +98,7 @@ public class HesapMakinesi {
 		btnToplama.setText(bundle.getString("toplama"));
 		btnCikarma.setText(bundle.getString("cikarma"));
 		btnCarpma.setText(bundle.getString("carpma"));
-		btnBolme.setText(bundle.getString("bölme"));
+		btnBolme.setText(bundle.getString("bÃ¶lme"));
 		lblStatus.setText(bundle.getString("durum"));
 		lblStatusInfo.setText("---");
 
@@ -246,7 +246,7 @@ public class HesapMakinesi {
 		btnCarpma.setBounds(279, 174, 137, 21);
 		frame.getContentPane().add(btnCarpma);
 
-		btnBolme.setText(bundle.getString("bölme"));
+		btnBolme.setText(bundle.getString("bÃ¶lme"));
 		btnBolme.setFont(new Font("Arial", Font.BOLD, 12));
 
 		btnBolme.addActionListener(new ActionListener() {
